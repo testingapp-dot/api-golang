@@ -77,6 +77,6 @@ func main() {
 		fmt.Fprintf(w, "Hello from Go! The current server time is <b>%s</b>", now)
 	})
 
-	fmt.Println("Server running at http://localhost:8080")
-	http.ListenAndServe(":8080", nil)
+	fmt.Println("Server running at http://localhost:5000")
+	http.ListenAndServe(":5000", nil)
 }
