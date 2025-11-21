@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"time"
 )
 
 func main() {
@@ -56,7 +57,7 @@ func main() {
 			Click the button to load content.
 		</div>
 
-		<button 
+		<button
 			hx-get="/load"
 			hx-target="#result"
 			hx-swap="innerHTML"
@@ -70,12 +71,12 @@ func main() {
 		`)
 	})
 
-	// HTMX endpoint
+	// HTMX endpoint (returns the current server time)
 	http.HandleFunc("/load", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "text/html")
-		fmt.Fprintf(w, "Hello from Go! The time is <b>%s</b>", r.Header.Get("Date"))
+		now := time.Now().Format("15:04:05")
+		fmt.Fprintf(w, "Hello from Go! The current server time is <b>%s</b>", now)
 	})
 
-	fmt.Println("Server running at http://localhost:5000")
-	http.ListenAndServe(":5000", nil)
+	fmt.Println("Server running at http://localhost:8080")
+	http.ListenAndServe(":8080", nil)
 }
