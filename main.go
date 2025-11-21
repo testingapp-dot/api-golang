@@ -51,7 +51,7 @@ func main() {
 <body>
 
 	<div class="card">
-		<h2>Go + HTMX Example</h2>
+		<h2>Go + HTMX</h2>
 
 		<div id="result" style="margin:1rem 0; color:#333;">
 			Click the button to load content.
