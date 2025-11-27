@@ -16,7 +16,7 @@ func main() {
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Go + HTMX Demo</title>
+	<title>Go + HTMX</title>
 
 	<!-- HTMX CDN -->
 	<script src="https://unpkg.com/htmx.org@1.9.10"></script>
