@@ -58,7 +58,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 <body>
 
 <div class="card">
-	<h2>HTMX + Go Demo</h2>
+	<h2>HTMX + Go</h2>
 
 	<div id="result"></div>
 
