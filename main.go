@@ -3,80 +3,81 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"time"
 )
 
 func main() {
+	http.HandleFunc("/", indexHandler)
+	http.HandleFunc("/hello", helloHandler)
 
-	// Root page (HTML + CSS + HTMX)
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "text/html")
-		fmt.Fprint(w, `
-<!DOCTYPE html>
-<html lang="en">
+	fmt.Println("Server running at http://localhost:5000")
+	http.ListenAndServe(":5000", nil)
+}
+
+func indexHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/html")
+
+	fmt.Fprint(w, `<!DOCTYPE html>
+<html>
 <head>
 	<meta charset="UTF-8">
-	<title>Go + HTMX</title>
+	<title>Go + HTMX + CSS</title>
 
-	<!-- HTMX CDN -->
+	<!-- HTMX -->
 	<script src="https://unpkg.com/htmx.org@1.9.10"></script>
 
 	<style>
 		body {
 			font-family: sans-serif;
-			margin: 2rem;
-			background: #f1f5f9;
+			background: #f4f4f4;
+			margin: 0;
+			padding: 40px;
+			text-align: center;
 		}
 		.card {
 			background: white;
-			padding: 1rem 1.5rem;
+			padding: 20px;
+			margin: auto;
+			width: 300px;
 			border-radius: 8px;
-			box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-			max-width: 400px;
+			box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 		}
 		button {
-			background: #2563eb;
+			background: #4CAF50;
 			color: white;
 			border: none;
-			padding: 0.5rem 1rem;
-			border-radius: 5px;
+			padding: 10px 20px;
+			border-radius: 4px;
 			cursor: pointer;
-			margin-top: 1rem;
+			font-size: 16px;
 		}
 		button:hover {
-			background: #1e40af;
+			background: #45a049;
 		}
 	</style>
 </head>
 <body>
 
-	<div class="card">
-		<h2>Go + HTMX</h2>
+<div class="card">
+	<h2>HTMX + Go Demo</h2>
 
-		<div id="result" style="margin:1rem 0; color:#333;">
-			Click the button to load content.
-		</div>
+	<div id="result"></div>
 
-		<button
-			hx-get="/load"
-			hx-target="#result"
-			hx-swap="innerHTML"
-		>
-			Load API Message
-		</button>
-	</div>
+	<button 
+		hx-get="/hello"
+		hx-trigger="click"
+		hx-target="#result"
+		hx-swap="innerHTML"
+	>
+		Load Message
+	</button>
+</div>
 
 </body>
-</html>
-		`)
-	})
+</html>`)
+}
 
-	// HTMX endpoint (returns the current server time)
-	http.HandleFunc("/load", func(w http.ResponseWriter, r *http.Request) {
-		now := time.Now().Format("15:04:05")
-		fmt.Fprintf(w, "Hello from Go! The current server time is <b>%s</b>", now)
-	})
-
-	fmt.Println("Server running at http://localhost:5000")
-	http.ListenAndServe(":5000", nil)
+func helloHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, `<p style="color: #4CAF50; font-weight: bold;">
+	Hello from the Go server! 🎉
+</p>`)
 }
