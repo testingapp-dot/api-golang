@@ -62,7 +62,7 @@ func main() {
 			hx-target="#result"
 			hx-swap="innerHTML"
 		>
-			Load Message
+			Load API Message
 		</button>
 	</div>
 
