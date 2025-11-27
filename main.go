@@ -12,8 +12,8 @@ func main() {
 	})
 
 	// Start the HTTP server and listen on port 8080
-	fmt.Println("Server listening on port 8080...")
-	err := http.ListenAndServe(":8080", nil) // nil uses the default ServeMux
+	fmt.Println("Server listening on port 5000...")
+	err := http.ListenAndServe(":5000", nil) // nil uses the default ServeMux
 	if err != nil {
 		fmt.Printf("Error starting server: %s\n", err)
 	}
